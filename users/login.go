@@ -12,6 +12,7 @@ type LoginRequest struct {
 }
 
 func (h handler) Login(c *gin.Context) {
+	session, _ := store.Get(c.Request, "session-name")
 	var req LoginRequest
 
 	if err := c.Bind(&req); err != nil {
@@ -31,6 +32,8 @@ func (h handler) Login(c *gin.Context) {
 		return
 	}
 
+	session.Values["authenticated"] = true
+	session.Save(c.Request, c.Writer)
 	c.JSON(200, &user)
 }
 

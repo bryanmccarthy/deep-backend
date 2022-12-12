@@ -30,6 +30,11 @@ func (h handler) Register(c *gin.Context) {
 	encryptedPassword, _ := EncryptPassword(req.Password)
 	user.Password = encryptedPassword
 
+	if err := h.DB.Where("Email = ?", req.Email).First(&user).Error; err == nil {
+		c.JSON(400, gin.H{"error": "email already exists"})
+		return
+	}
+
 	if err := h.DB.Create(&user).Error; err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return
