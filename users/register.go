@@ -7,9 +7,10 @@ import (
 )
 
 type RegisterRequest struct {
-	Username string
-	Email    string
-	Password string
+	Firstname string
+	Lastname  string
+	Email     string
+	Password  string
 }
 
 func (h handler) Register(c *gin.Context) {
@@ -22,7 +23,8 @@ func (h handler) Register(c *gin.Context) {
 
 	var user models.User
 
-	user.Username = req.Username
+	user.Firstname = req.Firstname
+	user.Lastname = req.Lastname
 	user.Email = req.Email
 
 	encryptedPassword, _ := EncryptPassword(req.Password)
@@ -41,3 +43,9 @@ func EncryptPassword(password string) (string, error) {
 
 	return string(bytes), err
 }
+
+// Test with:
+// Firstname: testfirst
+// Lastname: testlast
+// Email: testemail@gmail.com
+// Password: testpassword

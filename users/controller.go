@@ -15,4 +15,5 @@ func Routes(r *gin.Engine, db *gorm.DB) {
 	}
 
 	r.POST("/users/register", h.Register)
+	r.POST("/users/login", h.Login)
 }
