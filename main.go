@@ -3,7 +3,7 @@ package main
 import (
 	"time"
 
-	"github.com/bryanmccarthy/deep-backend/auth"
+	"github.com/bryanmccarthy/deep-backend/app"
 	"github.com/bryanmccarthy/deep-backend/db"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -33,7 +33,7 @@ func main() {
 	}))
 
 	// routes
-	auth.Routes(r, h)
+	app.Routes(r, h)
 
 	r.Run(port)
 }
