@@ -40,6 +40,7 @@ func (h handler) Login(c *gin.Context) {
 	}
 
 	session.Values["authenticated"] = true
+	session.Values["user_id"] = user.ID
 
 	if err := session.Save(c.Request, c.Writer); err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
