@@ -14,6 +14,13 @@ var (
 	store = sessions.NewCookieStore([]byte("set-this-to-secret")) // TODO: set this to secret
 )
 
+func Init() {
+	store.Options = &sessions.Options{
+		MaxAge:   3600 * 10, // 10 hours
+		HttpOnly: true,
+	}
+}
+
 func Routes(r *gin.Engine, db *gorm.DB) {
 	h := &handler{
 		DB: db,

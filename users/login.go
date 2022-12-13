@@ -14,7 +14,6 @@ type LoginRequest struct {
 // TODO: add validation
 
 func (h handler) Login(c *gin.Context) {
-	session, _ := store.Get(c.Request, "session")
 	var req LoginRequest
 
 	if err := c.Bind(&req); err != nil {
@@ -34,7 +33,18 @@ func (h handler) Login(c *gin.Context) {
 		return
 	}
 
+	session, err := store.Get(c.Request, "session")
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
 	session.Values["authenticated"] = true
-	session.Save(c.Request, c.Writer)
+
+	if err := session.Save(c.Request, c.Writer); err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
 	c.JSON(200, &user)
 }
