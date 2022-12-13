@@ -1,4 +1,4 @@
-package users
+package auth
 
 import (
 	"github.com/bryanmccarthy/deep-backend/models"

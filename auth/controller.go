@@ -1,4 +1,4 @@
-package users
+package auth
 
 import (
 	"github.com/gin-gonic/gin"
@@ -11,7 +11,7 @@ type handler struct {
 }
 
 var (
-	store = sessions.NewCookieStore([]byte("set-this-to-secret")) // TODO: set this to secret
+	store = sessions.NewCookieStore([]byte("secret")) // TODO: set this to secret
 )
 
 func Init() {
@@ -26,8 +26,8 @@ func Routes(r *gin.Engine, db *gorm.DB) {
 		DB: db,
 	}
 
-	r.POST("/users/register", h.Register)
-	r.POST("/users/login", h.Login)
-	r.GET("/users/logout", h.Logout)
-	r.GET("/users/secret", h.Secret)
+	r.POST("/auth/register", h.Register)
+	r.POST("/auth/login", h.Login)
+	r.GET("/auth/logout", h.Logout)
+	r.GET("/auth/secret", h.Secret)
 }
