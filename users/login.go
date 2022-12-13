@@ -46,5 +46,5 @@ func (h handler) Login(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, &user)
+	c.JSON(200, &user.Firstname)
 }
