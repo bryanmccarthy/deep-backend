@@ -11,8 +11,10 @@ type LoginRequest struct {
 	Password string
 }
 
+// TODO: add validation
+
 func (h handler) Login(c *gin.Context) {
-	session, _ := store.Get(c.Request, "session-name")
+	session, _ := store.Get(c.Request, "session")
 	var req LoginRequest
 
 	if err := c.Bind(&req); err != nil {
@@ -36,7 +38,3 @@ func (h handler) Login(c *gin.Context) {
 	session.Save(c.Request, c.Writer)
 	c.JSON(200, &user)
 }
-
-// Test with:
-// Email: testemail@gmail.com
-// Password: testpassword

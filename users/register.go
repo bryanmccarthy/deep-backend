@@ -13,6 +13,8 @@ type RegisterRequest struct {
 	Password  string
 }
 
+// TODO: add validation
+
 func (h handler) Register(c *gin.Context) {
 	var req RegisterRequest
 
@@ -48,9 +50,3 @@ func EncryptPassword(password string) (string, error) {
 
 	return string(bytes), err
 }
-
-// Test with:
-// Firstname: testfirst
-// Lastname: testlast
-// Email: testemail@gmail.com
-// Password: testpassword

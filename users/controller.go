@@ -10,7 +10,6 @@ type handler struct {
 	DB *gorm.DB
 }
 
-var cookie *sessions.CookieStore
 var (
 	store = sessions.NewCookieStore([]byte("set-this-to-secret")) // TODO: set this to secret
 )

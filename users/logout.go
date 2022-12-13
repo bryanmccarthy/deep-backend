@@ -5,7 +5,7 @@ import (
 )
 
 func (h handler) Logout(c *gin.Context) {
-	session, _ := store.Get(c.Request, "session-name")
+	session, _ := store.Get(c.Request, "session")
 
 	session.Values["authenticated"] = false
 	session.Save(c.Request, c.Writer)
