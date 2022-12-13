@@ -30,5 +30,4 @@ func Routes(r *gin.Engine, db *gorm.DB) {
 	r.POST("/auth/register", h.Register)
 	r.POST("/auth/login", h.Login)
 	r.GET("/auth/logout", h.Logout)
-	r.GET("/auth/secret", h.Secret)
 }
