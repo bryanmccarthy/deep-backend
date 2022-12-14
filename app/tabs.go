@@ -14,7 +14,7 @@ func (h handler) GetTabs(c *gin.Context) {
 		return
 	}
 
-	if session.Values["user_id"] == nil {
+	if session.Values["user_id"] == nil { // Check if user id exists before assigning
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "unauthorized"})
 		return
 	}

@@ -24,10 +24,15 @@ func (h handler) Register(c *gin.Context) {
 		return
 	}
 
-	// Validate email
-	_, err := mail.ParseAddress(req.Email)
+	_, err := mail.ParseAddress(req.Email) // Validate email
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid email"})
+		return
+	}
+
+	encryptedPassword, err := EncryptPassword(req.Password)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -36,8 +41,6 @@ func (h handler) Register(c *gin.Context) {
 	user.Firstname = req.Firstname
 	user.Lastname = req.Lastname
 	user.Email = req.Email
-
-	encryptedPassword, _ := EncryptPassword(req.Password)
 	user.Password = encryptedPassword
 
 	if err := h.DB.Where("Email = ?", req.Email).First(&user).Error; err == nil {
