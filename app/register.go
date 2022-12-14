@@ -1,6 +1,8 @@
 package app
 
 import (
+	"net/mail"
+
 	"github.com/bryanmccarthy/deep-backend/models"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
@@ -13,13 +15,18 @@ type RegisterRequest struct {
 	Password  string
 }
 
-// TODO: add validation
-
 func (h handler) Register(c *gin.Context) {
 	var req RegisterRequest
 
 	if err := c.Bind(&req); err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	// Validate email
+	_, err := mail.ParseAddress(req.Email)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "invalid email"})
 		return
 	}
 
