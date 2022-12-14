@@ -1,6 +1,7 @@
 package app
 
 import (
+	"net/http"
 	"net/mail"
 
 	"github.com/bryanmccarthy/deep-backend/models"
@@ -19,14 +20,14 @@ func (h handler) Register(c *gin.Context) {
 	var req RegisterRequest
 
 	if err := c.Bind(&req); err != nil {
-		c.JSON(400, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	// Validate email
 	_, err := mail.ParseAddress(req.Email)
 	if err != nil {
-		c.JSON(400, gin.H{"error": "invalid email"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid email"})
 		return
 	}
 
@@ -40,16 +41,16 @@ func (h handler) Register(c *gin.Context) {
 	user.Password = encryptedPassword
 
 	if err := h.DB.Where("Email = ?", req.Email).First(&user).Error; err == nil {
-		c.JSON(400, gin.H{"error": "email already exists"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "email already exists"})
 		return
 	}
 
 	if err := h.DB.Create(&user).Error; err != nil {
-		c.JSON(500, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(200, &user)
+	c.JSON(http.StatusOK, &user)
 }
 
 func EncryptPassword(password string) (string, error) {

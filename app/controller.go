@@ -26,8 +26,6 @@ func Routes(r *gin.Engine, db *gorm.DB) {
 		DB: db,
 	}
 
-	// TODO: change status codes
-
 	// Auth routes
 	r.POST("/auth/register", h.Register)
 	r.POST("/auth/login", h.Login)
