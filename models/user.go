@@ -8,4 +8,5 @@ type User struct {
 	Lastname  string
 	Email     string
 	Password  string
+	Tasks     []Task
 }
