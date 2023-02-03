@@ -8,7 +8,7 @@ import (
 )
 
 type createTaskRequest struct {
-	Title string // TODO: add more fields
+	Title string // TODO: add more fields?
 }
 
 func (h handler) createTask(c *gin.Context) {
@@ -35,5 +35,5 @@ func (h handler) createTask(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, task)
+	c.JSON(http.StatusOK, &task)
 }
