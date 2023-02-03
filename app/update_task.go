@@ -8,7 +8,11 @@ import (
 )
 
 type updateTaskRequest struct {
-	Title string // TODO: add more fields
+	ID        uint
+	Title     string
+	TimeSpent string
+	Current   bool
+	Completed bool
 }
 
 func (h handler) updateTask(c *gin.Context) {
@@ -27,9 +31,20 @@ func (h handler) updateTask(c *gin.Context) {
 
 	var task models.Task
 
+	if err := h.DB.Where("id = ? AND user_id = ?", req.ID, session.Values["user_id"]).First(&task).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
 	task.Title = req.Title
-	task.UserID = session.Values["user_id"].(uint)
+	task.TimeSpent = req.TimeSpent
+	task.Current = req.Current
+	task.Completed = req.Completed
 
-	// update task
+	if err := h.DB.Save(&task).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
 
+	c.JSON(http.StatusOK, &task)
 }
