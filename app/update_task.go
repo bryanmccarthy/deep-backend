@@ -7,12 +7,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type createTaskRequest struct {
+type updateTaskRequest struct {
 	Title string // TODO: add more fields
 }
 
-func (h handler) createTask(c *gin.Context) {
-	var req createTaskRequest
+func (h handler) updateTask(c *gin.Context) {
+	var req updateTaskRequest
 
 	if err := c.Bind(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -30,10 +30,6 @@ func (h handler) createTask(c *gin.Context) {
 	task.Title = req.Title
 	task.UserID = session.Values["user_id"].(uint)
 
-	if err := h.DB.Create(&task).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
+	// update task
 
-	c.JSON(http.StatusOK, task)
 }
