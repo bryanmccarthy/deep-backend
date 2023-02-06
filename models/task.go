@@ -5,7 +5,7 @@ import "gorm.io/gorm"
 type Task struct {
 	gorm.Model
 	Title     string
-	TimeSpent string
+	TimeSpent uint
 	Current   bool
 	Completed bool
 	UserID    uint

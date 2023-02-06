@@ -10,7 +10,7 @@ import (
 type updateTaskRequest struct {
 	ID        uint
 	Title     string
-	TimeSpent string
+	TimeSpent uint
 	Current   bool
 	Completed bool
 }
