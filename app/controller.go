@@ -35,4 +35,5 @@ func Routes(r *gin.Engine, db *gorm.DB) {
 	r.GET("/tasks", h.tasks)
 	r.POST("/tasks/create", h.createTask)
 	r.PUT("/tasks/update", h.updateTask)
+	r.PUT("/tasks/update/title", h.updateTaskTitle)
 }
