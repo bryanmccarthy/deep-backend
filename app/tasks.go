@@ -16,7 +16,7 @@ func (h handler) tasks(c *gin.Context) {
 		return
 	}
 
-	if err := h.DB.Where("user_id = ?", session.Values["user_id"]).Find(&tasks).Error; err != nil {
+	if err := h.DB.Where("user_id = ?", session.Values["user_id"]).Order("created_at").Find(&tasks).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
