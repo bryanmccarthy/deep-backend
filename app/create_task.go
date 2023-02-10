@@ -8,7 +8,8 @@ import (
 )
 
 type createTaskRequest struct {
-	Title string // TODO: add more fields?
+	Title      string
+	Difficulty uint
 }
 
 func (h handler) createTask(c *gin.Context) {
@@ -28,6 +29,8 @@ func (h handler) createTask(c *gin.Context) {
 	var task models.Task
 
 	task.Title = req.Title
+	task.Difficulty = req.Difficulty
+
 	task.UserID = session.Values["user_id"].(uint)
 
 	if err := h.DB.Create(&task).Error; err != nil {
