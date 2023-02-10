@@ -4,9 +4,9 @@ import "gorm.io/gorm"
 
 type Task struct {
 	gorm.Model
-	Title     string
-	TimeSpent uint
-	Current   bool
-	Completed bool
-	UserID    uint
+	Title      string
+	TimeSpent  uint
+	Difficulty uint
+	Completed  bool
+	UserID     uint
 }

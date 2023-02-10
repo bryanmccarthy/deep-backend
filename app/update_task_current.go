@@ -7,13 +7,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type updateTaskCurrentRequest struct {
-	ID      uint
-	Current bool
+type updateTaskDifficultyRequest struct {
+	ID         uint
+	Difficulty uint
 }
 
-func (h handler) updateTaskCurrent(c *gin.Context) {
-	var req updateTaskCurrentRequest
+func (h handler) updateTaskDifficulty(c *gin.Context) {
+	var req updateTaskDifficultyRequest
 
 	if err := c.Bind(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -33,7 +33,7 @@ func (h handler) updateTaskCurrent(c *gin.Context) {
 		return
 	}
 
-	task.Current = req.Current
+	task.Difficulty = req.Difficulty
 
 	if err := h.DB.Save(&task).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
