@@ -49,5 +49,10 @@ func (h handler) Login(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, &user.Firstname)
+	userObj := map[string]string{
+		"firstname": user.Firstname,
+		"lastname":  user.Lastname,
+	}
+
+	c.JSON(http.StatusOK, &userObj)
 }
