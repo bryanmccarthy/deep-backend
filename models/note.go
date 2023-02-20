@@ -7,4 +7,5 @@ type Note struct {
 	Title   string
 	Content string `gorm:"type:text"`
 	TaskID  uint
+	UserID  uint
 }
