@@ -8,17 +8,16 @@ import (
 )
 
 type updateTaskRequest struct {
-	ID         uint
-	Title      string
-	TimeSpent  uint
-	Difficulty uint
-	Completed  bool
+	ID         uint   `json:"id"`
+	Title      string `json:"title"`
+	Difficulty uint   `json:"difficulty"`
+	Completed  bool   `json:"completed"`
 }
 
 func (h handler) updateTask(c *gin.Context) {
 	var req updateTaskRequest
 
-	if err := c.Bind(&req); err != nil {
+	if err := c.BindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -37,7 +36,6 @@ func (h handler) updateTask(c *gin.Context) {
 	}
 
 	task.Title = req.Title
-	task.TimeSpent = req.TimeSpent
 	task.Difficulty = req.Difficulty
 	task.Completed = req.Completed
 

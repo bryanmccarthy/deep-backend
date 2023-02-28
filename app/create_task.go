@@ -8,14 +8,14 @@ import (
 )
 
 type createTaskRequest struct {
-	Title      string
-	Difficulty uint
+	Title      string `json:"title"`
+	Difficulty uint   `json:"difficulty"`
 }
 
 func (h handler) createTask(c *gin.Context) {
 	var req createTaskRequest
 
-	if err := c.Bind(&req); err != nil {
+	if err := c.BindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

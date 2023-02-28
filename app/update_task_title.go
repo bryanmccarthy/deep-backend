@@ -8,14 +8,14 @@ import (
 )
 
 type updateTaskTitleRequest struct {
-	ID    uint
-	Title string
+	ID    uint   `json:"id"`
+	Title string `json:"title"`
 }
 
 func (h handler) updateTaskTitle(c *gin.Context) {
 	var req updateTaskTitleRequest
 
-	if err := c.Bind(&req); err != nil {
+	if err := c.BindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

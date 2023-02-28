@@ -8,14 +8,14 @@ import (
 )
 
 type createNoteRequest struct {
-	Title  string
-	TaskID uint
+	Title  string `json:"title"`
+	TaskID uint   `json:"task_id"`
 }
 
 func (h handler) createNote(c *gin.Context) {
 	var req createNoteRequest
 
-	if err := c.Bind(&req); err != nil {
+	if err := c.BindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

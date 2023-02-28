@@ -8,14 +8,14 @@ import (
 )
 
 type updateTaskCompletedRequest struct {
-	ID        uint
-	Completed bool
+	ID        uint `json:"id"`
+	Completed bool `json:"completed"`
 }
 
 func (h handler) updateTaskCompleted(c *gin.Context) {
 	var req updateTaskCompletedRequest
 
-	if err := c.Bind(&req); err != nil {
+	if err := c.BindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

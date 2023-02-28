@@ -4,8 +4,9 @@ import "gorm.io/gorm"
 
 type Note struct {
 	gorm.Model
-	Title   string
-	Content string `gorm:"type:text"`
-	TaskID  uint
-	UserID  uint
+	ID      uint   `json:"id"`
+	Title   string `json:"title"`
+	Content string `json:"content" gorm:"type:text"`
+	TaskID  uint   `json:"task_id"`
+	UserID  uint   `json:"user_id"`
 }
