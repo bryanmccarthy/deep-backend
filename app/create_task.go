@@ -10,6 +10,7 @@ import (
 type createTaskRequest struct {
 	Title      string `json:"title"`
 	Difficulty uint   `json:"difficulty"`
+	DueDate    string `json:"due_date"`
 }
 
 func (h handler) createTask(c *gin.Context) {
@@ -30,6 +31,7 @@ func (h handler) createTask(c *gin.Context) {
 
 	task.Title = req.Title
 	task.Difficulty = req.Difficulty
+	task.DueDate = req.DueDate
 
 	task.UserID = session.Values["user_id"].(uint)
 
