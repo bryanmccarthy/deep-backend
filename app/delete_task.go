@@ -37,5 +37,10 @@ func (h handler) deleteTask(c *gin.Context) {
 		return
 	}
 
+	if err := h.DB.Where("task_id = ?", req.ID).Delete(&models.Note{}).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
 	c.JSON(http.StatusOK, &task)
 }
