@@ -30,7 +30,6 @@ func (h handler) createNote(c *gin.Context) {
 
 	note.Title = req.Title
 	note.TaskID = req.TaskID
-
 	note.UserID = session.Values["user_id"].(uint)
 
 	if err := h.DB.Create(&note).Error; err != nil {

@@ -32,7 +32,6 @@ func (h handler) createTask(c *gin.Context) {
 	task.Title = req.Title
 	task.Difficulty = req.Difficulty
 	task.DueDate = req.DueDate
-
 	task.UserID = session.Values["user_id"].(uint)
 
 	if err := h.DB.Create(&task).Error; err != nil {
