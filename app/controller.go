@@ -31,8 +31,9 @@ func Routes(r *gin.Engine, db *gorm.DB) {
 	r.POST("/auth/login", h.Login)
 	r.GET("/auth/logout", h.Logout)
 
-  // User routes
-  r.PUT("/user/update/time_spent", h.updateUserTimeSpent)
+	// User routes
+	r.GET("/user/time_spent", h.userTimeSpent)
+	r.PUT("/user/update/time_spent", h.updateUserTimeSpent)
 
 	// Tasks routes
 	r.GET("/tasks", h.tasks)
