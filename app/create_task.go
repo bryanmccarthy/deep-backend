@@ -12,6 +12,7 @@ type createTaskRequest struct {
 	Difficulty uint   `json:"difficulty"`
 	DueDate    string `json:"due_date"`
 	Completed  bool   `json:"completed"`
+	Progress   uint   `json:"progress"`
 }
 
 func (h handler) createTask(c *gin.Context) {
@@ -34,6 +35,7 @@ func (h handler) createTask(c *gin.Context) {
 	task.Difficulty = req.Difficulty
 	task.DueDate = req.DueDate
 	task.Completed = req.Completed
+	task.Progress = req.Progress // Task progress is 0% when created
 	task.UserID = session.Values["user_id"].(uint)
 
 	if err := h.DB.Create(&task).Error; err != nil {

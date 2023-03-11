@@ -9,5 +9,6 @@ type Task struct {
 	Difficulty uint   `json:"difficulty"`
 	DueDate    string `json:"due_date"`
 	Completed  bool   `json:"completed"`
+	Progress   uint   `json:"progress"`
 	UserID     uint   `json:"user_id"`
 }
