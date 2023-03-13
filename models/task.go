@@ -10,5 +10,6 @@ type Task struct {
 	DueDate    string `json:"due_date"`
 	Completed  bool   `json:"completed"`
 	Progress   uint   `json:"progress"`
+	TimeSpent  uint   `json:"time_spent"`
 	UserID     uint   `json:"user_id"`
 }

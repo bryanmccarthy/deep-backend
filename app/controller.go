@@ -43,6 +43,7 @@ func Routes(r *gin.Engine, db *gorm.DB) {
 	r.PUT("/tasks/update/completed", h.updateTaskCompleted)
 	r.PUT("/tasks/update/due_date", h.updateTaskDueDate)
 	r.PUT("/tasks/update/progress", h.updateTaskProgress)
+	r.PUT("/tasks/update/time_spent", h.updateTaskTimeSpent)
 	r.DELETE("/tasks/delete", h.deleteTask)
 
 	// Notes routes
