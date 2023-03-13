@@ -33,7 +33,7 @@ func (h handler) updateTaskTimeSpent(c *gin.Context) {
 		return
 	}
 
-	task.TimeSpent = req.TimeSpent
+	task.TimeSpent = task.TimeSpent + req.TimeSpent
 
 	if err := h.DB.Save(&task).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
