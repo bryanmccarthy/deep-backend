@@ -8,8 +8,9 @@ import (
 )
 
 type createNoteRequest struct {
-	Title  string `json:"title"`
-	TaskID uint   `json:"task_id"`
+	Title   string `json:"title"`
+	Content string `json:"content"`
+	TaskID  uint   `json:"task_id"`
 }
 
 func (h handler) createNote(c *gin.Context) {
@@ -29,6 +30,7 @@ func (h handler) createNote(c *gin.Context) {
 	var note models.Note
 
 	note.Title = req.Title
+	note.Content = req.Content
 	note.TaskID = req.TaskID
 	note.UserID = session.Values["user_id"].(uint)
 

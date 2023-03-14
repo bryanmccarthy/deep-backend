@@ -21,5 +21,5 @@ func (h handler) notes(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, notes)
+	c.JSON(http.StatusOK, &notes)
 }
