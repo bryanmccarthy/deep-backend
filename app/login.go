@@ -13,8 +13,6 @@ type LoginRequest struct {
 	Password string
 }
 
-// TODO: add validation
-
 func (h handler) Login(c *gin.Context) {
 	var req LoginRequest
 
