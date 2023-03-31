@@ -11,7 +11,7 @@ type handler struct {
 }
 
 var (
-	store = sessions.NewCookieStore([]byte("set-this-to-secret")) // TODO: set this to secret
+	store = sessions.NewCookieStore([]byte("set-this-to-secret"))
 )
 
 func Init() {
