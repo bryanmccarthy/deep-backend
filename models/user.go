@@ -9,5 +9,5 @@ type User struct {
 	Lastname  string `json:"lastname"`
 	Email     string `json:"email"`
 	Password  string `json:"password"`
-  TimeSpent uint   `json:"time_spent"`
+	TimeSpent uint   `json:"time_spent"`
 }
